@@ -3,7 +3,95 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NLMove — Trasferirsi in Olanda, senza stress</title>
+
+  <!-- ═══ SEO BASE ═══ -->
+  <title>NLMove — Trasferirsi in Olanda per Italiani | Supporto BSN, Casa, Lavoro</title>
+  <meta name="description" content="Ti aiuto a trasferirti in Olanda senza stress: BSN, documentazione, ricerca casa, CV in formato olandese e supporto completo per italiani nei Paesi Bassi. Consulenza gratuita."/>
+  <meta name="keywords" content="trasferirsi in Olanda, vivere nei Paesi Bassi, italiani in Olanda, BSN olandese, trasferimento Olanda italiani, supporto expat Olanda, come ottenere il BSN, lavoro in Olanda italiani, NLMove"/>
+  <meta name="author" content="NLMove"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://nlmove.nl/"/>
+
+  <!-- ═══ OPEN GRAPH (Facebook, WhatsApp, LinkedIn) ═══ -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://nlmove.nl/"/>
+  <meta property="og:title" content="NLMove — Trasferirsi in Olanda per Italiani"/>
+  <meta property="og:description" content="Ti aiuto a trasferirti in Olanda senza stress: BSN, documentazione, casa, lavoro e burocrazia. Consulenza gratuita per italiani nei Paesi Bassi."/>
+  <meta property="og:image" content="https://nlmove.nl/og-image.jpg"/>
+  <meta property="og:locale" content="it_IT"/>
+  <meta property="og:site_name" content="NLMove"/>
+
+  <!-- ═══ TWITTER / X CARD ═══ -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="NLMove — Trasferirsi in Olanda per Italiani"/>
+  <meta name="twitter:description" content="Ti aiuto a trasferirti in Olanda senza stress: BSN, documentazione, casa, lavoro. Consulenza gratuita."/>
+  <meta name="twitter:image" content="https://nlmove.nl/og-image.jpg"/>
+
+  <!-- ═══ DATI STRUTTURATI JSON-LD (Google Rich Results) ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "NLMove",
+    "description": "Servizio di supporto e consulenza per italiani che si trasferiscono nei Paesi Bassi. Assistenza BSN, documentazione, ricerca casa, revisione CV e orientamento per expat.",
+    "url": "https://nlmove.nl",
+    "telephone": "+393886304984",
+    "email": "info@nlmove.nl",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "NL"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Netherlands"
+    },
+    "serviceType": "Relocation Consulting",
+    "priceRange": "€€",
+    "sameAs": [
+      "https://wa.me/393886304984"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "47"
+    }
+  }
+  </script>
+
+  <!-- ═══ FAQ SCHEMA (aiuta a comparire nelle FAQ di Google) ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Come si ottiene il BSN in Olanda?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Il BSN (Burgerservicenummer) è il codice fiscale olandese e si ottiene registrandosi al comune (gemeente) dopo aver trovato una residenza nei Paesi Bassi. NLMove ti supporta in tutto il processo di prenotazione e documentazione necessaria."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Cosa serve per trasferirsi in Olanda da italiano?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Come cittadino UE, gli italiani possono trasferirsi in Olanda liberamente. Serve trovare una residenza, registrarsi al comune (BRP), ottenere il BSN, aprire un conto bancario olandese e iscriversi a un'assicurazione sanitaria (zorgverzekering)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Cos'è il 30% Ruling in Olanda?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Il 30% Ruling è un'agevolazione fiscale olandese che permette ai lavoratori stranieri qualificati di ricevere fino al 30% dello stipendio esentasse per i primi anni di lavoro nei Paesi Bassi."
+        }
+      }
+    ]
+  }
+  </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Epilogue:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -65,7 +153,7 @@
     /* ─── HERO ─── */
     .hero {
       min-height: 100vh;
-      padding: 120px 5% 80px;
+      padding: 90px 5% 60px;
       display: flex; flex-direction: column; justify-content: center;
       position: relative; overflow: hidden;
     }
@@ -84,7 +172,9 @@
     .hero::after {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 70% at 60% 50%, rgba(247,246,242,0) 0%, var(--bg) 80%);
+      background: 
+        linear-gradient(to right, rgba(247,246,242,0.97) 45%, rgba(247,246,242,0.3) 100%),
+        radial-gradient(ellipse 80% 70% at 60% 50%, rgba(247,246,242,0) 0%, var(--bg) 80%);
       pointer-events: none;
     }
     .hero-inner { position: relative; z-index: 1; max-width: 1100px; }
@@ -108,7 +198,7 @@
     .hero h1 .accent { color: var(--accent); }
     .hero h1 .italic { font-style: italic; font-weight: 400; color: var(--ink2); }
     .hero-sub {
-      font-size: 1.1rem; font-weight: 300; line-height: 1.75;
+      font-size: 1.1rem; font-weight: 400; line-height: 1.75;
       color: var(--ink2); max-width: 520px;
       margin-top: 1.8rem;
       opacity: 0; animation: rise 0.7s 0.35s ease forwards;
@@ -179,7 +269,7 @@
     .marquee-dot { color: var(--accent); font-size: 1.2rem; }
 
     /* ─── SECTIONS ─── */
-    section { padding: 7rem 5%; }
+    section { padding: 4.5rem 5%; }
     .section-label {
       font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--accent);
@@ -206,66 +296,35 @@
     .services-header {
       display: flex; justify-content: space-between;
       align-items: flex-end; gap: 2rem;
-      margin-bottom: 3rem; flex-wrap: wrap;
+      margin-bottom: 3.5rem; flex-wrap: wrap;
     }
-    /* Nuova griglia servizi — 2 colonne su desktop, 1 su mobile */
-    .svc-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.2rem;
+    .grid-3 {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px;
+      border: 1.5px solid var(--line); border-radius: 1.2rem; overflow: hidden;
     }
-    .svc-card {
-      background: var(--bg);
-      border: 1.5px solid var(--line);
-      border-radius: 1.2rem;
-      padding: 1.8rem;
-      display: flex; flex-direction: column; gap: 0.6rem;
-      transition: border-color 0.22s, box-shadow 0.22s, transform 0.22s;
+    .svc-item {
+      padding: 2rem 1.8rem;
+      background: var(--white);
+      border: none; border-right: 1.5px solid var(--line);
+      border-bottom: 1.5px solid var(--line);
+      transition: background 0.22s;
       cursor: default;
     }
-    .svc-card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 8px 30px rgba(217,95,43,0.1);
-      transform: translateY(-3px);
-    }
-    .svc-card-top {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 0.4rem;
-    }
-    .svc-card-icon { font-size: 2rem; line-height: 1; }
-    .svc-card-num {
+    .svc-item:hover { background: var(--bg); }
+    .svc-item:nth-child(3), .svc-item:nth-child(6) { border-right: none; }
+    .svc-item:nth-child(4), .svc-item:nth-child(5), .svc-item:nth-child(6) { border-bottom: none; }
+    .svc-num {
       font-family: 'Syne', sans-serif;
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
-      color: var(--ink3); background: var(--white);
-      border: 1px solid var(--line); border-radius: 2rem;
-      padding: 0.2rem 0.6rem;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      color: var(--accent); margin-bottom: 1.2rem;
     }
-    .svc-card-name {
+    .svc-ico { font-size: 1.6rem; margin-bottom: 0.8rem; }
+    .svc-name {
       font-family: 'Syne', sans-serif;
-      font-size: 1.05rem; font-weight: 700; color: var(--ink);
-      line-height: 1.2;
+      font-size: 1rem; font-weight: 700; color: var(--ink);
+      margin-bottom: 0.5rem;
     }
-    .svc-card-desc {
-      font-size: 0.86rem; font-weight: 300;
-      color: var(--ink2); line-height: 1.65; flex: 1;
-    }
-    .svc-card-tags {
-      display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem;
-    }
-    .svc-card-tags span {
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em;
-      color: var(--accent); background: rgba(217,95,43,0.08);
-      border: 1px solid rgba(217,95,43,0.2);
-      border-radius: 2rem; padding: 0.2rem 0.65rem;
-    }
-    /* Tablet: 2 colonne */
-    @media (max-width: 960px) {
-      .svc-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    /* Mobile: 1 colonna */
-    @media (max-width: 560px) {
-      .svc-grid { grid-template-columns: 1fr; }
-    }
+    .svc-desc { font-size: 0.85rem; font-weight: 300; color: var(--ink2); line-height: 1.65; }
 
     /* ─── COME FUNZIONA ─── */
     .steps-wrap {
@@ -304,7 +363,7 @@
     .step-desc { font-size: 0.83rem; font-weight: 300; color: var(--ink2); line-height: 1.65; }
 
     /* ─── PERCHÉ OLANDA ─── */
-    .why-bg { background: var(--ink); color: white; }
+    .why-bg { background: var(--ink); color: white; overflow: hidden; }
     .why-bg h2 { color: white; }
     .why-bg .section-label { color: var(--accent); }
     .why-bg .section-label::before { background: var(--accent); }
@@ -519,9 +578,13 @@
 
     /* ─── RESPONSIVE — TABLET (960px) ─── */
     @media (max-width: 960px) {
-      section { padding: 5rem 5%; }
+      section { padding: 3.5rem 5%; }
 
-
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+      .svc-item:nth-child(3) { border-right: 1.5px solid var(--line); }
+      .svc-item:nth-child(2) { border-right: none; }
+      .svc-item:nth-child(4) { border-bottom: 1.5px solid var(--line); }
+      .svc-item:nth-child(5), .svc-item:nth-child(6) { border-bottom: none; }
 
       .steps-wrap { grid-template-columns: 1fr 1fr; }
       .step-block { border-bottom: 1.5px solid var(--line); }
@@ -560,7 +623,10 @@
       /* Sections */
       section { padding: 4rem 5%; }
 
-
+      /* Servizi */
+      .grid-3 { grid-template-columns: 1fr; }
+      .svc-item { border-right: none !important; }
+      .svc-item:last-child { border-bottom: none !important; }
 
       /* Steps */
       .steps-wrap { grid-template-columns: 1fr; }
@@ -568,7 +634,13 @@
       .step-block:last-child { border-bottom: none !important; }
 
       /* Why Olanda */
-      .facts-grid { grid-template-columns: 1fr 1fr; }
+      .facts-grid {
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+        overflow: hidden;
+      }
+      .fact-n { font-size: 1.8rem !important; }
+      .fact-cell { padding: 1.2rem 1rem !important; }
       .fact-cell:nth-child(2), .fact-cell:nth-child(4) { border-right: none !important; }
       .fact-cell:nth-child(3), .fact-cell:nth-child(4) { border-bottom: none !important; }
 
@@ -658,7 +730,7 @@
     /* ─── DOWNLOAD GUIDA ─── */
     .download-section {
       background: var(--ink);
-      padding: 5rem 5%;
+      padding: 3.5rem 5%;
       display: flex; align-items: center; justify-content: space-between;
       gap: 2rem; flex-wrap: wrap;
     }
@@ -703,7 +775,6 @@
     <li><a href="#perche-olanda">Perché l'Olanda</a></li>
     <li><a href="#prezzi">Prezzi</a></li>
     <li><a href="guida-trasferimento-olanda.pdf" download style="color:var(--accent);font-weight:600;">📥 Guida Gratuita</a></li>
-    <li><a href="#contatto">Contatti</a></li>
     <li><a href="#testimonianze">Recensioni</a></li>
     <li><a href="https://calendly.com/movenlexpat/consulenza-gratuita-30-min" target="_blank" rel="noopener" class="nav-pill">Consulenza gratuita →</a></li>
   </ul>
@@ -719,6 +790,7 @@
   <a href="#perche-olanda" class="mobile-link">Perché l'Olanda</a>
   <a href="#prezzi" class="mobile-link">Prezzi</a>
   <a href="#testimonianze" class="mobile-link">Recensioni</a>
+  <a href="#contatto" class="mobile-link">Contatti</a>
   <a href="guida-trasferimento-olanda.pdf" download class="mobile-link" style="color:var(--accent)">📥 Guida Gratuita</a>
   <a href="https://calendly.com/movenlexpat/consulenza-gratuita-30-min" target="_blank" rel="noopener" class="mobile-pill">Consulenza gratuita →</a>
 </div>
@@ -739,24 +811,6 @@
       <a href="https://calendly.com/movenlexpat/consulenza-gratuita-30-min" target="_blank" rel="noopener" class="btn-dark">Prenota consulenza gratuita →</a>
       <a href="#servizi" class="btn-ghost">Scopri i servizi</a>
     </div>
-    <div class="hero-stats">
-      <div>
-        <div class="h-stat-num">200<span>+</span></div>
-        <div class="h-stat-label">Famiglie e professionisti aiutati</div>
-      </div>
-      <div>
-        <div class="h-stat-num">8</div>
-        <div class="h-stat-label">Anni di esperienza</div>
-      </div>
-      <div>
-        <div class="h-stat-num">98<span>%</span></div>
-        <div class="h-stat-label">Clienti soddisfatti</div>
-      </div>
-      <div>
-        <div class="h-stat-num">12</div>
-        <div class="h-stat-label">Città olandesi coperte</div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -764,18 +818,22 @@
 <div class="marquee-wrap">
   <div class="marquee-track">
     <!-- duplicated for seamless loop -->
-        <div class="marquee-item">Ricerca Casa <span class="marquee-dot">·</span></div>
-            <div class="marquee-item">Iscrizione Scolastica <span class="marquee-dot">·</span></div>
-        <div class="marquee-item">BSN & Gemeentelijke BRP <span class="marquee-dot">·</span></div>
-            <div class="marquee-item">Ricerca Casa <span class="marquee-dot">·</span></div>
-            <div class="marquee-item">Iscrizione Scolastica <span class="marquee-dot">·</span></div>
-        <div class="marquee-item">BSN & Gemeentelijke BRP <span class="marquee-dot">·</span></div>
-      </div>
+    <div class="marquee-item">Ricerca Casa <span class="marquee-dot">·</span></div>
+    <div class="marquee-item">30% Ruling <span class="marquee-dot">·</span></div>
+    <div class="marquee-item">Apertura Partita IVA <span class="marquee-dot">·</span></div>
+    <div class="marquee-item">BSN & Gemeentelijke BRP <span class="marquee-dot">·</span></div>
+    <div class="marquee-item">Conto Bancario <span class="marquee-dot">·</span></div>
+    <div class="marquee-item">Ricerca Casa <span class="marquee-dot">·</span></div>
+    <div class="marquee-item">30% Ruling <span class="marquee-dot">·</span></div>
+    <div class="marquee-item">Apertura Partita IVA <span class="marquee-dot">·</span></div>
+    <div class="marquee-item">BSN & Gemeentelijke BRP <span class="marquee-dot">·</span></div>
+    <div class="marquee-item">Conto Bancario <span class="marquee-dot">·</span></div>
+  </div>
 </div>
 
 <!-- SERVIZI -->
 <section class="services-bg" id="servizi">
-  <div style="padding: 7rem 5%;">
+  <div style="padding: 4.5rem 5%;">
     <div class="services-header">
       <div>
         <div class="section-label">Cosa offro</div>
@@ -783,42 +841,32 @@
       </div>
       <p class="section-sub" style="margin-top:0">Ogni trasferimento è diverso. Per questo ogni percorso è personalizzato sul tuo caso specifico.</p>
     </div>
-    <div class="svc-grid">
-      <div class="svc-card">
-        <div class="svc-card-top">
-          <div class="svc-card-icon">📋</div>
-          <div class="svc-card-num">01</div>
-        </div>
-        <div class="svc-card-name">Documentazione per il Trasferimento</div>
-        <p class="svc-card-desc">Guida completa a tutti i documenti necessari: iscrizione al comune (BRP), codice fiscale olandese (BSN), apertura conto corrente e ogni adempimento burocratico.</p>
-        <div class="svc-card-tags"><span>BSN</span><span>BRP</span><span>Conto Bancario</span></div>
+    <div class="grid-3">
+      <div class="svc-item">
+        <div class="svc-num">01</div>
+        <div class="svc-ico">📋</div>
+        <div class="svc-name">Documentazione per il Trasferimento</div>
+        <p class="svc-desc">Guida completa a tutti i documenti necessari: iscrizione al comune (BRP), codice fiscale olandese (BSN), apertura conto corrente e ogni adempimento burocratico.</p>
       </div>
-      <div class="svc-card">
-        <div class="svc-card-top">
-          <div class="svc-card-icon">📝</div>
-          <div class="svc-card-num">02</div>
-        </div>
-        <div class="svc-card-name">Revisione & Ottimizzazione del CV</div>
-        <p class="svc-card-desc">Adattamento del tuo curriculum agli standard olandesi: struttura, formato, tono e parole chiave per massimizzare le possibilità di essere ricontattato.</p>
-        <div class="svc-card-tags"><span>Formato NL</span><span>Keywords</span><span>Consegna 48h</span></div>
+
+      <div class="svc-item">
+        <div class="svc-num">02</div>
+        <div class="svc-ico">📝</div>
+        <div class="svc-name">Revisione & Ottimizzazione del CV</div>
+        <p class="svc-desc">Adattamento del tuo curriculum agli standard olandesi: struttura, formato, tono e parole chiave per massimizzare le possibilità di essere ricontattato.</p>
       </div>
-      <div class="svc-card">
-        <div class="svc-card-top">
-          <div class="svc-card-icon">🏥</div>
-          <div class="svc-card-num">03</div>
-        </div>
-        <div class="svc-card-name">Sanità & Assicurazioni</div>
-        <p class="svc-card-desc">Iscrizione al medico di base, scelta zorgverzekering e supporto per la zorgtoeslag (sussidio sanitario).</p>
-        <div class="svc-card-tags"><span>Huisarts</span><span>Zorgverzekering</span><span>Zorgtoeslag</span></div>
+      <div class="svc-item">
+        <div class="svc-num">03</div>
+        <div class="svc-ico">🏥</div>
+        <div class="svc-name">Sanità & Assicurazioni</div>
+        <p class="svc-desc">Iscrizione al medico di base, scelta zorgverzekering e supporto per la zorgtoeslag (sussidio sanitario).</p>
       </div>
-      <div class="svc-card">
-        <div class="svc-card-top">
-          <div class="svc-card-icon">🗺️</div>
-          <div class="svc-card-num">04</div>
-        </div>
-        <div class="svc-card-name">Orientamento Iniziale</div>
-        <p class="svc-card-desc">Una sessione dedicata per capire da dove iniziare, cosa aspettarsi e costruire il tuo piano passo per passo.</p>
-        <div class="svc-card-tags"><span>Consulenza</span><span>Piano Personale</span><span>Q&amp;A</span></div>
+
+      <div class="svc-item">
+        <div class="svc-num">04</div>
+        <div class="svc-ico">🗺️</div>
+        <div class="svc-name">Orientamento Iniziale</div>
+        <p class="svc-desc">Una sessione dedicata per capire da dove iniziare, cosa aspettarsi e costruire il tuo piano passo per passo.</p>
       </div>
     </div>
   </div>
@@ -843,7 +891,7 @@
 
 <!-- PREZZI -->
 <section class="pricing-bg" id="prezzi">
-  <div style="padding: 7rem 5%;">
+  <div style="padding: 4.5rem 5%;">
     <div class="section-label">Tariffe</div>
     <h2>Scegli il servizio<br>di cui hai bisogno</h2>
     <p class="section-sub">Prezzi trasparenti, nessuna sorpresa. Inizia sempre con una consulenza gratuita.</p>
@@ -946,7 +994,7 @@
 
 <!-- PERCHÉ OLANDA -->
 <section class="why-bg" id="perche-olanda">
-  <div style="padding: 7rem 5%;">
+  <div style="padding: 4.5rem 5%;">
     <div class="section-label">Perché sceglierla</div>
     <h2>L'Olanda che non ti aspetti</h2>
     <div class="why-grid">
@@ -1048,7 +1096,7 @@
 
 <!-- CONTATTO -->
 <section class="contact-bg" id="contatto">
-  <div style="padding: 7rem 5%;">
+  <div style="padding: 4.5rem 5%;">
     <div class="section-label">Inizia ora</div>
     <div class="contact-grid">
       <div class="contact-left">
@@ -1063,6 +1111,7 @@
         <div class="contact-divider">oppure compila il form</div>
 
         <p style="font-size:0.82rem; color:var(--ink3); line-height:1.6;">
+          📧 ciao@nlmove.it<br>
           🕐 Risposta entro 24h lavorative<br>
           🇮🇹 Parli con un italiano che conosce entrambe le culture
         </p>
@@ -1109,13 +1158,6 @@
               <span id="btn-text">Invia richiesta 🇳🇱</span>
             </button>
             <p class="form-note">🔒 I tuoi dati sono al sicuro. Nessuno spam.</p>
-            <div style="text-align:center; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--line);">
-              <p style="font-size:0.78rem; color:var(--ink3); margin-bottom:0.6rem;">Preferisci un contatto diretto?</p>
-              <a href="https://wa.me/393886304984?text=Ciao!%20Vorrei%20informazioni%20sul%20trasferimento%20in%20Olanda." target="_blank" rel="noopener"
-                style="display:inline-flex; align-items:center; gap:0.5rem; background:#25D366; color:white; padding:0.6rem 1.3rem; border-radius:2rem; font-size:0.85rem; font-weight:600; text-decoration:none; transition:transform 0.2s;">
-                💬 Scrivimi su WhatsApp
-              </a>
-            </div>
           </form>
         </div>
         <div class="form-success" id="form-success">
@@ -1133,9 +1175,24 @@
 <footer>
   <div class="footer-logo">NL<span>Move</span></div>
   <div style="display:flex; gap:1.2rem; align-items:center;">
-    <a href="#" title="Instagram — presto disponibile" style="color:rgba(255,255,255,0.35); font-size:1.3rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#E8642A'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">📸</a>
-    <a href="#" title="Facebook — presto disponibile" style="color:rgba(255,255,255,0.35); font-size:1.3rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#E8642A'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">👍</a>
-    <a href="#" title="TikTok — presto disponibile" style="color:rgba(255,255,255,0.35); font-size:1.3rem; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='#E8642A'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">🎵</a>
+    <!-- Instagram -->
+    <a href="#" title="Instagram — presto disponibile" class="social-icon" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.35'" style="opacity:0.35;display:inline-flex;align-items:center;transition:opacity 0.2s;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+      </svg>
+    </a>
+    <!-- Facebook -->
+    <a href="#" title="Facebook — presto disponibile" class="social-icon" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.35'" style="opacity:0.35;display:inline-flex;align-items:center;transition:opacity 0.2s;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+    </a>
+    <!-- TikTok -->
+    <a href="#" title="TikTok — presto disponibile" class="social-icon" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.35'" style="opacity:0.35;display:inline-flex;align-items:center;transition:opacity 0.2s;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+      </svg>
+    </a>
   </div>
   <div>© 2024 NLMove — Consulenza trasferimento in Olanda</div>
   <div class="footer-links">
