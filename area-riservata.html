@@ -10,15 +10,9 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #f7f6f2;
-      --white: #ffffff;
-      --ink: #1a1a18;
-      --ink2: #4a4a45;
-      --ink3: #9a9a92;
-      --accent: #D95F2B;
-      --line: rgba(26,26,24,0.1);
-      --green: #2a7a4e;
-      --green-bg: #eefff4;
+      --bg: #f7f6f2; --white: #ffffff; --ink: #1a1a18;
+      --ink2: #4a4a45; --ink3: #9a9a92; --accent: #D95F2B;
+      --line: rgba(26,26,24,0.1); --green: #2a7a4e; --green-bg: #eefff4;
     }
     body { font-family: 'Epilogue', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; }
 
@@ -26,159 +20,195 @@
     nav {
       position: sticky; top: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1rem 5%;
-      background: rgba(247,246,242,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
+      padding: 1rem 5%; background: rgba(247,246,242,0.95);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--line);
     }
     .logo { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; text-decoration: none; color: var(--ink); letter-spacing: -0.03em; }
     .logo span { color: var(--accent); }
-    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
-    .user-name { font-size: 0.85rem; color: var(--ink2); }
-    .btn-logout {
-      font-size: 0.82rem; color: var(--ink3); background: none; border: none;
-      cursor: pointer; font-family: 'Epilogue', sans-serif;
-      transition: color 0.2s; padding: 0.3rem 0.7rem;
-      border: 1px solid var(--line); border-radius: 2rem;
-    }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .user-name { font-size: 0.82rem; color: var(--ink2); }
+    .btn-logout { font-size: 0.82rem; color: var(--ink3); background: none; border: 1px solid var(--line); border-radius: 2rem; padding: 0.3rem 0.8rem; cursor: pointer; font-family: 'Epilogue', sans-serif; transition: color 0.2s, border-color 0.2s; }
     .btn-logout:hover { color: var(--accent); border-color: var(--accent); }
 
-    /* LAYOUT */
-    .page { max-width: 1000px; margin: 0 auto; padding: 2.5rem 5% 4rem; }
+    /* TABS NAV */
+    .tabs-nav {
+      display: flex; gap: 0; border-bottom: 1px solid var(--line);
+      background: white; padding: 0 5%; overflow-x: auto;
+    }
+    .tab-btn {
+      padding: 1rem 1.5rem; border: none; background: none; cursor: pointer;
+      font-family: 'Epilogue', sans-serif; font-size: 0.88rem; font-weight: 500;
+      color: var(--ink3); border-bottom: 2px solid transparent;
+      transition: all 0.2s; white-space: nowrap; margin-bottom: -1px;
+    }
+    .tab-btn.active { color: var(--ink); border-bottom-color: var(--accent); }
+    .tab-btn:hover:not(.active) { color: var(--ink2); }
 
+    /* PAGE */
+    .page { max-width: 960px; margin: 0 auto; padding: 2rem 5% 4rem; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* WELCOME */
     .welcome-bar {
-      background: var(--ink); color: white;
-      border-radius: 1.2rem; padding: 2rem 2.5rem;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap;
+      background: var(--ink); color: white; border-radius: 1.2rem;
+      padding: 1.8rem 2.2rem; display: flex; align-items: center;
+      justify-content: space-between; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap;
     }
-    .welcome-bar h1 { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700; letter-spacing: -0.03em; }
-    .welcome-bar p { font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-top: 0.3rem; }
-    .progress-pill {
-      background: var(--accent); color: white;
-      border-radius: 2rem; padding: 0.5rem 1.2rem;
-      font-size: 0.82rem; font-weight: 600; white-space: nowrap;
-    }
+    .welcome-bar h1 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; letter-spacing: -0.03em; }
+    .welcome-bar p { font-size: 0.88rem; color: rgba(255,255,255,0.55); margin-top: 0.3rem; }
+    .progress-pill { background: var(--accent); color: white; border-radius: 2rem; padding: 0.45rem 1.1rem; font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
 
     /* GRID */
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    .grid-full { grid-column: 1 / -1; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .full { grid-column: 1 / -1; }
 
-    /* CARDS */
-    .card {
-      background: white; border-radius: 1.2rem;
-      border: 1px solid var(--line); padding: 1.8rem;
-    }
-    .card-label {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--ink3); margin-bottom: 1rem;
-    }
-    .card h2 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.02em; }
+    /* CARD */
+    .card { background: white; border-radius: 1.2rem; border: 1px solid var(--line); padding: 1.8rem; }
+    .card-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); margin-bottom: 1rem; }
+    .card h2 { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.02em; }
 
     /* CHECKLIST */
-    .checklist { display: flex; flex-direction: column; gap: 0; }
-    .check-item {
-      display: flex; align-items: flex-start; gap: 0.9rem;
-      padding: 0.85rem 0; border-bottom: 1px solid var(--line);
-      cursor: pointer; transition: background 0.15s;
-    }
+    .checklist { display: flex; flex-direction: column; }
+    .check-item { display: flex; align-items: flex-start; gap: 0.9rem; padding: 0.8rem 0; border-bottom: 1px solid var(--line); cursor: pointer; }
     .check-item:last-child { border-bottom: none; }
-    .check-item:hover { background: var(--bg); margin: 0 -1.8rem; padding-left: 1.8rem; padding-right: 1.8rem; }
-    .check-box {
-      width: 20px; height: 20px; border-radius: 6px;
-      border: 2px solid var(--line); flex-shrink: 0; margin-top: 1px;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s; background: white;
-    }
+    .check-box { width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--line); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
     .check-item.done .check-box { background: var(--green); border-color: var(--green); }
-    .check-item.done .check-box::after { content: '✓'; color: white; font-size: 0.75rem; font-weight: 700; }
+    .check-item.done .check-box::after { content: '✓'; color: white; font-size: 0.72rem; font-weight: 700; }
     .check-text { flex: 1; }
-    .check-title { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
+    .check-title { font-size: 0.88rem; font-weight: 500; }
     .check-item.done .check-title { color: var(--ink3); text-decoration: line-through; }
-    .check-desc { font-size: 0.78rem; color: var(--ink3); margin-top: 0.2rem; line-height: 1.4; }
-    .check-badge {
-      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em;
-      text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 2rem;
-      flex-shrink: 0; align-self: center;
-    }
+    .check-desc { font-size: 0.76rem; color: var(--ink3); margin-top: 0.15rem; line-height: 1.4; }
+    .check-badge { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.18rem 0.55rem; border-radius: 2rem; flex-shrink: 0; align-self: center; }
     .check-badge.urgente { background: #fff0ee; color: #c0391b; }
     .check-badge.importante { background: #fff8ee; color: #a05a00; }
     .check-badge.opzionale { background: var(--bg); color: var(--ink3); }
 
-    /* PROGRESS BAR */
-    .progress-wrap { margin-bottom: 1.5rem; }
-    .progress-bar-bg { background: var(--bg); border-radius: 2rem; height: 8px; overflow: hidden; margin-top: 0.5rem; }
-    .progress-bar-fill { height: 100%; background: var(--accent); border-radius: 2rem; transition: width 0.4s ease; }
-    .progress-label { font-size: 0.82rem; color: var(--ink2); display: flex; justify-content: space-between; }
+    /* PROGRESS */
+    .prog-wrap { margin-bottom: 1.2rem; }
+    .prog-labels { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--ink2); margin-bottom: 0.4rem; }
+    .prog-bg { background: var(--bg); border-radius: 2rem; height: 7px; overflow: hidden; }
+    .prog-fill { height: 100%; background: var(--accent); border-radius: 2rem; transition: width 0.4s ease; }
 
     /* DOWNLOAD */
-    .download-card {
-      background: linear-gradient(135deg, var(--ink) 0%, #2d2d2a 100%);
-      color: white; border-radius: 1.2rem; padding: 1.8rem;
-      display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
-    }
-    .download-card .icon { font-size: 2.5rem; }
-    .download-card h2 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; }
-    .download-card p { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-top: 0.3rem; }
-    .btn-download {
-      background: var(--accent); color: white;
-      padding: 0.75rem 1.5rem; border-radius: 2rem;
-      text-decoration: none; font-size: 0.88rem; font-weight: 500;
-      white-space: nowrap; transition: background 0.2s;
-      margin-left: auto;
-    }
-    .btn-download:hover { background: #c0501f; }
+    .dl-card { background: var(--ink); color: white; border-radius: 1.2rem; padding: 1.8rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .dl-card .icon { font-size: 2.2rem; }
+    .dl-card h2 { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; color: white; }
+    .dl-card p { font-size: 0.83rem; color: rgba(255,255,255,0.55); margin-top: 0.25rem; }
+    .btn-dl { background: var(--accent); color: white; padding: 0.7rem 1.4rem; border-radius: 2rem; text-decoration: none; font-size: 0.85rem; font-weight: 500; white-space: nowrap; transition: background 0.2s; margin-left: auto; }
+    .btn-dl:hover { background: #c0501f; }
 
     /* PERCORSO */
-    .steps-list { display: flex; flex-direction: column; gap: 0; }
-    .step-row {
-      display: flex; align-items: center; gap: 1rem;
-      padding: 0.9rem 0; border-bottom: 1px solid var(--line);
-    }
+    .step-row { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid var(--line); }
     .step-row:last-child { border-bottom: none; }
-    .step-num {
-      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.78rem; font-weight: 700;
-    }
+    .step-num { width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; }
     .step-num.done { background: var(--green-bg); color: var(--green); }
     .step-num.active { background: var(--accent); color: white; }
     .step-num.pending { background: var(--bg); color: var(--ink3); }
     .step-info { flex: 1; }
-    .step-name { font-size: 0.9rem; font-weight: 500; }
-    .step-sub { font-size: 0.78rem; color: var(--ink3); margin-top: 0.1rem; }
-    .step-status { font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.7rem; border-radius: 2rem; }
-    .step-status.done { background: var(--green-bg); color: var(--green); }
-    .step-status.active { background: #fff8ee; color: #a05a00; }
-    .step-status.pending { background: var(--bg); color: var(--ink3); }
+    .step-name { font-size: 0.88rem; font-weight: 500; }
+    .step-sub { font-size: 0.75rem; color: var(--ink3); margin-top: 0.1rem; }
+    .step-badge { font-size: 0.72rem; font-weight: 600; padding: 0.18rem 0.65rem; border-radius: 2rem; }
+    .step-badge.done { background: var(--green-bg); color: var(--green); }
+    .step-badge.active { background: #fff8ee; color: #a05a00; }
+    .step-badge.pending { background: var(--bg); color: var(--ink3); }
 
-    /* CTA CONSULENZA */
-    .cta-card {
-      background: var(--accent); color: white;
-      border-radius: 1.2rem; padding: 1.8rem;
-      text-align: center;
-    }
-    .cta-card h2 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .cta-card p { font-size: 0.88rem; color: rgba(255,255,255,0.8); margin-bottom: 1.2rem; }
-    .btn-cta {
-      background: white; color: var(--accent);
-      padding: 0.75rem 1.5rem; border-radius: 2rem;
-      text-decoration: none; font-size: 0.9rem; font-weight: 600;
-      display: inline-block; transition: transform 0.2s;
-    }
+    /* SELF-UPDATE STEP */
+    .step-btn { font-size: 0.78rem; background: var(--ink); color: white; border: none; border-radius: 2rem; padding: 0.35rem 0.9rem; cursor: pointer; font-family: 'Epilogue', sans-serif; transition: background 0.2s; white-space: nowrap; }
+    .step-btn:hover { background: var(--accent); }
+    .step-btn.done-btn { background: var(--green-bg); color: var(--green); cursor: default; }
+
+    /* CTA */
+    .cta-card { background: var(--accent); color: white; border-radius: 1.2rem; padding: 1.8rem; text-align: center; }
+    .cta-card h2 { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .cta-card p { font-size: 0.85rem; color: rgba(255,255,255,0.8); margin-bottom: 1.2rem; }
+    .btn-cta { background: white; color: var(--accent); padding: 0.7rem 1.4rem; border-radius: 2rem; text-decoration: none; font-size: 0.88rem; font-weight: 600; display: inline-block; transition: transform 0.2s; }
     .btn-cta:hover { transform: translateY(-2px); }
+
+    /* ─── TEST INGLESE ─── */
+    .test-intro { text-align: center; padding: 2rem 0 2.5rem; }
+    .test-intro h2 { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.6rem; }
+    .test-intro p { color: var(--ink2); font-size: 0.95rem; max-width: 500px; margin: 0 auto 1.5rem; line-height: 1.6; }
+
+    .test-meta { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+    .test-meta-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--ink2); background: white; border: 1px solid var(--line); border-radius: 2rem; padding: 0.4rem 1rem; }
+
+    .test-card { background: white; border-radius: 1.2rem; border: 1px solid var(--line); padding: 2rem; max-width: 680px; margin: 0 auto; }
+    .test-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .test-progress-text { font-size: 0.8rem; color: var(--ink3); font-weight: 500; }
+    .test-level-badge { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.7rem; border-radius: 2rem; }
+    .badge-a1 { background: #f0f8ff; color: #2060a0; }
+    .badge-a2 { background: #f0fff4; color: #1a6b3a; }
+    .badge-b1 { background: #fff8f0; color: #8b4a00; }
+    .badge-b2 { background: #fff0f8; color: #8b0050; }
+    .badge-c1 { background: #f5f0ff; color: #5020a0; }
+
+    .test-prog-bg { background: var(--bg); border-radius: 2rem; height: 5px; margin-bottom: 1.8rem; overflow: hidden; }
+    .test-prog-fill { height: 100%; background: var(--accent); border-radius: 2rem; transition: width 0.4s ease; }
+
+    .question-num { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); margin-bottom: 0.8rem; }
+    .question-text { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; line-height: 1.4; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+    .question-context { font-size: 0.83rem; color: var(--ink2); margin-bottom: 1.5rem; font-style: italic; }
+
+    .options { display: flex; flex-direction: column; gap: 0.75rem; }
+    .option {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.9rem 1.1rem; border: 1.5px solid var(--line);
+      border-radius: 0.8rem; cursor: pointer; transition: all 0.2s;
+      background: white;
+    }
+    .option:hover { border-color: var(--ink2); background: var(--bg); }
+    .option.selected { border-color: var(--accent); background: #fff5f0; }
+    .option.correct { border-color: var(--green); background: var(--green-bg); }
+    .option.wrong { border-color: #c0391b; background: #fff0ee; }
+    .option-letter { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: var(--ink2); flex-shrink: 0; transition: all 0.2s; }
+    .option.selected .option-letter { background: var(--accent); color: white; }
+    .option.correct .option-letter { background: var(--green); color: white; }
+    .option.wrong .option-letter { background: #c0391b; color: white; }
+    .option-text { font-size: 0.9rem; color: var(--ink); }
+
+    .feedback-box { margin-top: 1rem; padding: 0.9rem 1.1rem; border-radius: 0.8rem; font-size: 0.85rem; line-height: 1.5; display: none; }
+    .feedback-box.correct { background: var(--green-bg); color: var(--green); display: block; }
+    .feedback-box.wrong { background: #fff0ee; color: #c0391b; display: block; }
+
+    .test-actions { display: flex; justify-content: flex-end; margin-top: 1.5rem; }
+    .btn-next { background: var(--ink); color: white; border: none; border-radius: 2rem; padding: 0.8rem 1.8rem; font-family: 'Epilogue', sans-serif; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: background 0.2s; display: none; }
+    .btn-next:hover { background: var(--accent); }
+    .btn-next.visible { display: block; }
+
+    /* RISULTATO */
+    .result-card { background: white; border-radius: 1.2rem; border: 1px solid var(--line); padding: 2.5rem; max-width: 600px; margin: 0 auto; text-align: center; }
+    .result-level { font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; color: var(--accent); letter-spacing: -0.04em; margin-bottom: 0.3rem; }
+    .result-label { font-size: 0.85rem; color: var(--ink3); margin-bottom: 1.5rem; }
+    .result-score { font-size: 1.1rem; color: var(--ink2); margin-bottom: 1.5rem; }
+    .result-desc { font-size: 0.92rem; color: var(--ink2); line-height: 1.7; margin-bottom: 2rem; padding: 1.2rem; background: var(--bg); border-radius: 0.8rem; text-align: left; }
+    .result-tips { text-align: left; margin-bottom: 2rem; }
+    .result-tips h3 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 0.8rem; }
+    .tip-item { display: flex; align-items: flex-start; gap: 0.7rem; font-size: 0.85rem; color: var(--ink2); padding: 0.5rem 0; border-bottom: 1px solid var(--line); line-height: 1.5; }
+    .tip-item:last-child { border-bottom: none; }
+    .tip-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .btn-retry { background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 2rem; padding: 0.7rem 1.4rem; font-family: 'Epilogue', sans-serif; font-size: 0.88rem; cursor: pointer; margin-right: 0.8rem; transition: all 0.2s; }
+    .btn-retry:hover { border-color: var(--ink); }
+    .btn-consult { background: var(--accent); color: white; border: none; border-radius: 2rem; padding: 0.7rem 1.4rem; font-family: 'Epilogue', sans-serif; font-size: 0.88rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s; }
+    .btn-consult:hover { background: #c0501f; }
+
+    /* ALREADY DONE */
+    .result-done { background: white; border-radius: 1.2rem; border: 1px solid var(--line); padding: 2rem; max-width: 600px; margin: 0 auto; text-align: center; }
+    .result-done .big-level { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; color: var(--accent); }
 
     /* LOADING */
     .loading { display: flex; align-items: center; justify-content: center; min-height: 60vh; }
-    .spinner { width: 36px; height: 36px; border: 3px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }
+    .spinner { width: 34px; height: 34px; border: 3px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    @media (max-width: 680px) {
-      .grid { grid-template-columns: 1fr; }
-      .grid-full { grid-column: auto; }
-      .welcome-bar { padding: 1.5rem; }
-      .welcome-bar h1 { font-size: 1.2rem; }
-      .btn-download { margin-left: 0; }
+    @media (max-width: 640px) {
+      .grid2 { grid-template-columns: 1fr; }
+      .full { grid-column: auto; }
+      .welcome-bar { padding: 1.3rem 1.5rem; }
+      .welcome-bar h1 { font-size: 1.15rem; }
+      .btn-dl { margin-left: 0; }
+      .test-card { padding: 1.3rem; }
+      .question-text { font-size: 0.98rem; }
     }
   </style>
 </head>
@@ -195,175 +225,375 @@
 <div id="loading" class="loading"><div class="spinner"></div></div>
 
 <div id="content" style="display:none;">
+
+  <!-- TABS NAV -->
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="switchTab('dashboard')">📋 Dashboard</button>
+    <button class="tab-btn" onclick="switchTab('test')">🇬🇧 Test di Inglese</button>
+    <button class="tab-btn" onclick="switchTab('guida')">📘 Guida PDF</button>
+  </div>
+
   <div class="page">
 
-    <!-- WELCOME -->
-    <div class="welcome-bar">
-      <div>
-        <h1>Ciao, <span id="greeting-name">benvenuto</span> 👋</h1>
-        <p>Il tuo percorso verso l'Olanda è iniziato. Ecco il tuo pannello personale.</p>
-      </div>
-      <div class="progress-pill" id="progress-pill">0 / 10 completati</div>
-    </div>
+    <!-- ══════════════ DASHBOARD ══════════════ -->
+    <div id="tab-dashboard" class="tab-content active">
 
-    <div class="grid">
-
-      <!-- CHECKLIST -->
-      <div class="card grid-full">
-        <div class="card-label">Checklist Trasferimento</div>
-        <div class="progress-wrap">
-          <div class="progress-label">
-            <span>Avanzamento</span>
-            <span id="progress-pct">0%</span>
-          </div>
-          <div class="progress-bar-bg">
-            <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
-          </div>
-        </div>
-        <div class="checklist" id="checklist"></div>
-      </div>
-
-      <!-- GUIDA PDF -->
-      <div class="download-card grid-full">
-        <div class="icon">📘</div>
+      <div class="welcome-bar">
         <div>
-          <h2>Guida Completa al Trasferimento in Olanda</h2>
-          <p>Tutto quello che devi sapere prima di partire — documenti, burocrazia, casa, lavoro.</p>
+          <h1>Ciao, <span id="greeting-name">benvenuto</span> 👋</h1>
+          <p>Il tuo pannello personale NLMove. Tieni traccia del tuo percorso.</p>
         </div>
-        <a href="guida-trasferimento-olanda.pdf" download class="btn-download">📥 Scarica PDF</a>
+        <div class="progress-pill" id="progress-pill">0 / 10 completati</div>
       </div>
 
-      <!-- IL TUO PERCORSO -->
-      <div class="card">
-        <div class="card-label">Il tuo percorso</div>
-        <h2>Stato avanzamento</h2>
-        <div class="steps-list">
-          <div class="step-row">
-            <div class="step-num done">✓</div>
-            <div class="step-info">
-              <div class="step-name">Registrazione</div>
-              <div class="step-sub">Account creato con successo</div>
-            </div>
-            <span class="step-status done">Completato</span>
+      <div class="grid2">
+
+        <!-- CHECKLIST -->
+        <div class="card full">
+          <div class="card-label">Checklist Trasferimento</div>
+          <div class="prog-wrap">
+            <div class="prog-labels"><span>Avanzamento</span><span id="prog-pct">0%</span></div>
+            <div class="prog-bg"><div class="prog-fill" id="prog-bar" style="width:0%"></div></div>
           </div>
-          <div class="step-row">
-            <div class="step-num active">2</div>
-            <div class="step-info">
-              <div class="step-name">Consulenza gratuita</div>
-              <div class="step-sub">30 minuti con un esperto</div>
-            </div>
-            <span class="step-status active">In corso</span>
+          <div class="checklist" id="checklist"></div>
+        </div>
+
+        <!-- PERCORSO -->
+        <div class="card">
+          <div class="card-label">Il tuo percorso</div>
+          <h2>Stato avanzamento</h2>
+          <div id="steps-list"></div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-card">
+          <h2>Pronto a fare il passo?</h2>
+          <p>Prenota la consulenza gratuita di 30 minuti e pianifichiamo il tuo trasferimento insieme.</p>
+          <a href="https://calendly.com/movenlexpat/consulenza-gratuita-30-min" target="_blank" class="btn-cta">Prenota consulenza gratuita →</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════ TEST INGLESE ══════════════ -->
+    <div id="tab-test" class="tab-content">
+
+      <div id="test-intro-section" class="test-intro">
+        <h2>Test di Inglese</h2>
+        <p>Valuta il tuo livello prima della consulenza. 15 domande, circa 10 minuti. Il risultato sarà visibile al consulente.</p>
+        <div class="test-meta">
+          <div class="test-meta-item">⏱ ~10 minuti</div>
+          <div class="test-meta-item">❓ 15 domande</div>
+          <div class="test-meta-item">📊 Risultato A1 → C1</div>
+        </div>
+        <button class="btn-cta" style="background:var(--ink);color:white;" onclick="startTest()">Inizia il test →</button>
+      </div>
+
+      <div id="test-question-section" style="display:none;">
+        <div class="test-card">
+          <div class="test-header">
+            <span class="test-progress-text" id="q-counter">Domanda 1 di 15</span>
+            <span class="test-level-badge badge-a1" id="q-level-badge">A1</span>
           </div>
-          <div class="step-row">
-            <div class="step-num pending">3</div>
-            <div class="step-info">
-              <div class="step-name">Pacchetto personalizzato</div>
-              <div class="step-sub">Supporto completo documentazione</div>
-            </div>
-            <span class="step-status pending">Da fare</span>
-          </div>
-          <div class="step-row">
-            <div class="step-num pending">4</div>
-            <div class="step-info">
-              <div class="step-name">Trasferimento</div>
-              <div class="step-sub">Arrivo e primo insediamento</div>
-            </div>
-            <span class="step-status pending">Da fare</span>
+          <div class="test-prog-bg"><div class="test-prog-fill" id="test-prog" style="width:0%"></div></div>
+          <div class="question-num" id="q-num">DOMANDA 1</div>
+          <div class="question-text" id="q-text"></div>
+          <div class="question-context" id="q-context"></div>
+          <div class="options" id="options"></div>
+          <div class="feedback-box" id="feedback"></div>
+          <div class="test-actions">
+            <button class="btn-next" id="btn-next" onclick="nextQuestion()">Avanti →</button>
           </div>
         </div>
       </div>
 
-      <!-- CTA -->
-      <div class="cta-card">
-        <h2>Pronto a fare il passo?</h2>
-        <p>Prenota la tua consulenza gratuita di 30 minuti e iniziamo a pianificare il tuo trasferimento.</p>
-        <a href="https://calendly.com/movenlexpat/consulenza-gratuita-30-min" target="_blank" class="btn-cta">Prenota consulenza gratuita →</a>
+      <div id="test-result-section" style="display:none;"></div>
+
+      <div id="test-done-section" style="display:none;">
+        <div class="result-done">
+          <div class="big-level" id="done-level"></div>
+          <div style="font-size:0.85rem;color:var(--ink3);margin-bottom:1rem;">Livello completato</div>
+          <p style="font-size:0.9rem;color:var(--ink2);margin-bottom:1.5rem;">Hai già completato il test. Il tuo risultato è stato salvato e il consulente lo vedrà prima della call.</p>
+          <button class="btn-retry" onclick="retryTest()">Rifai il test</button>
+          <a href="https://calendly.com/movenlexpat/consulenza-gratuita-30-min" target="_blank" class="btn-consult">Prenota consulenza →</a>
+        </div>
       </div>
 
     </div>
+
+    <!-- ══════════════ GUIDA PDF ══════════════ -->
+    <div id="tab-guida" class="tab-content">
+      <div style="max-width:600px;margin:2rem auto;">
+        <div class="dl-card" style="flex-direction:column;align-items:flex-start;gap:1.2rem;">
+          <div style="font-size:3rem;">📘</div>
+          <div>
+            <h2 style="color:white;font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:0.5rem;">Guida Completa al Trasferimento in Olanda</h2>
+            <p style="color:rgba(255,255,255,0.6);font-size:0.88rem;line-height:1.6;">Tutto quello che devi sapere prima di partire — documenti, burocrazia, casa, lavoro, sanità e molto altro. Scritta da chi ci vive, pensata per gli italiani.</p>
+          </div>
+          <a href="guida-trasferimento-olanda.pdf" download class="btn-dl" style="margin-left:0;">📥 Scarica PDF</a>
+        </div>
+        <div class="card" style="margin-top:1.5rem;">
+          <div class="card-label">Cosa trovi nella guida</div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem;margin-top:0.5rem;">
+            <div class="tip-item"><span class="tip-icon">📋</span> Come ottenere il BSN passo per passo</div>
+            <div class="tip-item"><span class="tip-icon">🏠</span> Come trovare casa nei Paesi Bassi</div>
+            <div class="tip-item"><span class="tip-icon">💼</span> Il mercato del lavoro olandese</div>
+            <div class="tip-item"><span class="tip-icon">🏥</span> Sistema sanitario e assicurazioni</div>
+            <div class="tip-item"><span class="tip-icon">💰</span> Tasse, 30% Ruling e agevolazioni fiscali</div>
+            <div class="tip-item"><span class="tip-icon">🚲</span> Vita quotidiana e integrazione</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
 <script>
-  const SUPABASE_URL = 'https://zckurgiswkgjhpvsxagi.supabase.co';
-  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpja3VyZ2lzd2tnamhwdnN4YWdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzMTQyNzMsImV4cCI6MjA5NDg5MDI3M30.tWhbowRuGD1D3RqVay8fz09oPL5IPfFSPv7LNgMKyYA';
-  const { createClient } = supabase;
-  const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
+const SUPABASE_URL = 'https://zckurgiswkgjhpvsxagi.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpja3VyZ2lzd2tnamhwdnN4YWdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzMTQyNzMsImV4cCI6MjA5NDg5MDI3M30.tWhbowRuGD1D3RqVay8fz09oPL5IPfFSPv7LNgMKyYA';
+const { createClient } = supabase;
+const sb = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  const CHECKLIST = [
-    { id: 'passaporto', title: 'Passaporto / Carta d\'identità valida', desc: 'Verifica la scadenza — deve essere valida per almeno 6 mesi', badge: 'urgente' },
-    { id: 'bsn', title: 'Ottenere il BSN', desc: 'Codice fiscale olandese — richiesto al comune (gemeente)', badge: 'urgente' },
-    { id: 'residenza', title: 'Trovare una residenza', desc: 'Appartamento o stanza con contratto regolare', badge: 'urgente' },
-    { id: 'brp', title: 'Registrazione BRP al comune', desc: 'Iscrizione all\'anagrafe comunale olandese', badge: 'urgente' },
-    { id: 'conto', title: 'Aprire un conto bancario olandese', desc: 'ING, Rabobank, ABN AMRO o N26 per iniziare', badge: 'importante' },
-    { id: 'assicurazione', title: 'Assicurazione sanitaria (zorgverzekering)', desc: 'Obbligatoria entro 4 mesi dall\'arrivo', badge: 'importante' },
-    { id: 'cv', title: 'Adattare il CV al formato olandese', desc: 'Struttura, tono e parole chiave specifiche per il mercato NL', badge: 'importante' },
-    { id: 'dichiarazione', title: 'Dichiarazione di espatrio in Italia', desc: 'Iscrizione AIRE (Anagrafe Italiani Residenti all\'Estero)', badge: 'importante' },
-    { id: 'ruling', title: 'Verificare idoneità 30% Ruling', desc: 'Agevolazione fiscale per lavoratori stranieri qualificati', badge: 'opzionale' },
-    { id: 'lingua', title: 'Corso di olandese base', desc: 'Non obbligatorio ma molto utile per integrarsi', badge: 'opzionale' },
-  ];
+// ── CHECKLIST DATA ──
+const CHECKLIST = [
+  { id:'passaporto', title:'Passaporto / Carta d\'identità valida', desc:'Verifica scadenza — valida almeno 6 mesi', badge:'urgente' },
+  { id:'bsn', title:'Ottenere il BSN', desc:'Codice fiscale olandese al gemeente', badge:'urgente' },
+  { id:'residenza', title:'Trovare una residenza', desc:'Appartamento con contratto regolare', badge:'urgente' },
+  { id:'brp', title:'Registrazione BRP al comune', desc:'Iscrizione anagrafe comunale olandese', badge:'urgente' },
+  { id:'conto', title:'Aprire un conto bancario olandese', desc:'ING, Rabobank, ABN AMRO o N26', badge:'importante' },
+  { id:'assicurazione', title:'Assicurazione sanitaria (zorgverzekering)', desc:'Obbligatoria entro 4 mesi dall\'arrivo', badge:'importante' },
+  { id:'cv', title:'Adattare il CV al formato olandese', desc:'Struttura e parole chiave per il mercato NL', badge:'importante' },
+  { id:'aire', title:'Iscrizione AIRE', desc:'Anagrafe Italiani Residenti all\'Estero', badge:'importante' },
+  { id:'ruling', title:'Verificare idoneità 30% Ruling', desc:'Agevolazione fiscale lavoratori stranieri', badge:'opzionale' },
+  { id:'lingua', title:'Corso di olandese base', desc:'Non obbligatorio ma utile per integrarsi', badge:'opzionale' },
+];
 
-  let checked = {};
-  let userName = '';
+// ── TEST QUESTIONS ──
+const QUESTIONS = [
+  { level:'A1', text:'What does "Good morning" mean?', context:'', options:['Buonanotte','Buongiorno','Buonasera','Ciao'], correct:1, explanation:'"Good morning" significa "Buongiorno", usato al mattino.' },
+  { level:'A1', text:'Complete: "My name ___ Marco."', context:'', options:['are','am','is','be'], correct:2, explanation:'Con "My name" si usa "is": My name is Marco.' },
+  { level:'A1', text:'Which word means "lavoro" in English?', context:'', options:['Home','Work','Food','Car'], correct:1, explanation:'"Work" significa lavoro. Fondamentale per i colloqui olandesi.' },
+  { level:'A2', text:'Choose the correct sentence:', context:'Stai descrivendo la tua esperienza lavorativa.', options:['I working at a company for 3 years.','I have worked at a company for 3 years.','I work at a company since 3 years.','I worked at a company since 3 years.'], correct:1, explanation:'Il present perfect "have worked" è corretto con "for" + periodo di tempo.' },
+  { level:'A2', text:'What does "accommodation" mean?', context:'Il tuo recruiter olandese ti chiede se hai trovato accommodation.', options:['Lavoro','Trasporto','Alloggio','Stipendio'], correct:2, explanation:'"Accommodation" significa alloggio/sistemazione. Parola frequente nel mercato olandese.' },
+  { level:'A2', text:'Complete: "I am looking ___ a new job in Amsterdam."', context:'', options:['at','for','to','after'], correct:1, explanation:'"Looking for" = cercare. "I am looking for a job" è la forma standard.' },
+  { level:'B1', text:'Which is the most professional way to start an email?', context:'Stai scrivendo a un recruiter olandese.', options:['Hey! I want a job.','Dear Mr. van der Berg, I am writing to express my interest in...','Hello, give me job please.','To who it concerns,'], correct:1, explanation:'In Olanda le email professionali iniziano con "Dear + cognome". Il tono è formale ma diretto.' },
+  { level:'B1', text:'What is a "contract of indefinite duration"?', context:'Il tuo datore di lavoro olandese ti offre questo contratto.', options:['Contratto a termine','Contratto part-time','Contratto a tempo indeterminato','Contratto stagionale'], correct:2, explanation:'In Olanda è il "vast contract" — l\'obiettivo di molti lavoratori stranieri.' },
+  { level:'B1', text:'Choose the correct response to: "Could you elaborate on your previous experience?"', context:'Durante un colloquio di lavoro in inglese.', options:['Yes, I worked.','Certainly! In my previous role at X, I was responsible for...','No problem, I have experience.','Sure, my experience is good.'], correct:1, explanation:'La risposta B è strutturata, professionale e dimostra capacità comunicative avanzate.' },
+  { level:'B2', text:'What does "net salary" mean?', context:'Il contratto offre €3.500 net salary.', options:['Stipendio lordo','Stipendio netto (dopo tasse)','Stipendio mensile','Stipendio annuale'], correct:1, explanation:'"Net salary" è lo stipendio netto, quello che ricevi dopo le detrazioni fiscali. In Olanda è importante saperlo calcolare.' },
+  { level:'B2', text:'Which phrase best describes the Dutch work culture?', context:'', options:['Highly hierarchical and formal','Direct, egalitarian, and work-life balance focused','Informal but very long working hours','Strictly formal with little autonomy'], correct:1, explanation:'La cultura lavorativa olandese è nota per la comunicazione diretta, struttura piatta e forte attenzione al work-life balance.' },
+  { level:'B2', text:'Complete professionally: "I would like to ___ my application for the position of..."', context:'Stai scrivendo una lettera di presentazione.', options:['give','send','submit','put'], correct:2, explanation:'"Submit an application" è il termine formale corretto in contesti professionali anglofoni.' },
+  { level:'C1', text:'What is the meaning of "proactive" in a job description?', context:'"We are looking for a proactive team member."', options:['Qualcuno che aspetta istruzioni','Qualcuno che anticipa problemi e agisce senza essere sollecitato','Qualcuno molto attivo fisicamente','Qualcuno con esperienza internazionale'], correct:1, explanation:'"Proactive" è una delle qualità più richieste nei job posting olandesi: significa anticipare le situazioni e agire di propria iniziativa.' },
+  { level:'C1', text:'Which sentence uses the subjunctive correctly?', context:'', options:['It is essential that he submits the report today.','It is essential that he submit the report today.','It is essential that he submitted the report today.','It is essential that he will submit the report today.'], correct:1, explanation:'Il congiuntivo inglese (subjunctive) usa la forma base del verbo: "that he submit" — non "submits". Tipico nei testi formali.' },
+  { level:'C1', text:'In a negotiation, what does "to table a proposal" mean in British English?', context:'Il tuo manager olandese dice: "Let\'s table this proposal for now."', options:['Rifiutare definitivamente una proposta','Presentare formalmente una proposta','Rimandare una proposta a dopo','Approvare una proposta'], correct:2, explanation:'Attenzione: in inglese britannico "to table" significa rimandare/sospendere, mentre in americano significa presentare. I Paesi Bassi usano spesso l\'inglese britannico.' },
+];
 
-  async function init() {
-    const { data: { session } } = await sb.auth.getSession();
-    if (!session) { window.location.href = 'login.html'; return; }
+const LEVELS = {
+  A1: { label:'A1 — Base', desc:'Conosci le basi dell\'inglese ma hai ancora molto da lavorare per essere operativo in un contesto lavorativo olandese.', tips:['Inizia con app come Duolingo o Babbel quotidianamente','Guarda serie TV in inglese con sottotitoli italiani','Impara almeno 10 parole nuove al giorno legate al lavoro'] },
+  A2: { label:'A2 — Elementare', desc:'Riesci a comunicare in situazioni semplici. Con un po\' di pratica puoi raggiungere il livello necessario per lavorare in Olanda.', tips:['Prova a guardare film in inglese con sottotitoli in inglese','Inizia a scrivere email semplici in inglese','Pratica conversazioni base su argomenti quotidiani'] },
+  B1: { label:'B1 — Intermedio', desc:'Hai una buona base. Puoi gestire situazioni lavorative semplici in inglese ma devi rafforzare il lessico professionale.', tips:['Leggi articoli professionali del tuo settore in inglese','Pratica il vocabolario specifico dei colloqui di lavoro','Considera un corso B1→B2 online (Coursera, edX)'] },
+  B2: { label:'B2 — Intermedio superiore', desc:'Ottimo livello! Puoi lavorare efficacemente in un ambiente anglofono olandese. La maggior parte dei recruiter cerca questo livello minimo.', tips:['Perfeziona la scrittura professionale (email, report)','Pratica presentazioni e public speaking in inglese','Segui podcast business in inglese'] },
+  C1: { label:'C1 — Avanzato', desc:'Livello eccellente. Puoi operare con piena efficacia in qualsiasi contesto lavorativo internazionale, incluso il mercato olandese più competitivo.', tips:['Il tuo inglese è un vantaggio competitivo — usalo nel CV','Considera ruoli internazionali o multinazionali in Olanda','Mantieni il livello con letture e contenuti complessi'] },
+};
 
-    const user = session.user;
-    userName = user.user_metadata?.full_name?.split(' ')[0] || user.email.split('@')[0];
-    document.getElementById('greeting-name').textContent = userName;
-    document.getElementById('user-name').textContent = user.email;
+// ── STATE ──
+let currentUser = null;
+let checked = {};
+let userSteps = {};
+let currentQ = 0;
+let score = 0;
+let answers = [];
 
-    // Load saved checklist from localStorage
-    const saved = localStorage.getItem('nlmove_checklist_' + user.id);
-    checked = saved ? JSON.parse(saved) : {};
+// ── INIT ──
+async function init() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { window.location.href = 'login.html'; return; }
+  currentUser = session.user;
+  const name = currentUser.user_metadata?.full_name?.split(' ')[0] || currentUser.email.split('@')[0];
+  document.getElementById('greeting-name').textContent = name;
+  document.getElementById('user-name').textContent = currentUser.email;
+  const saved = localStorage.getItem('nlmove_check_' + currentUser.id);
+  checked = saved ? JSON.parse(saved) : {};
+  const savedSteps = localStorage.getItem('nlmove_steps_' + currentUser.id);
+  userSteps = savedSteps ? JSON.parse(savedSteps) : { consulenza: false, pacchetto: false, trasferimento: false };
+  renderChecklist();
+  renderSteps();
+  checkTestDone();
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('content').style.display = 'block';
+}
 
-    renderChecklist(user.id);
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('content').style.display = 'block';
-  }
+// ── TABS ──
+function switchTab(tab) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
 
-  function renderChecklist(userId) {
-    const container = document.getElementById('checklist');
-    container.innerHTML = '';
-    CHECKLIST.forEach(item => {
-      const done = !!checked[item.id];
-      const div = document.createElement('div');
-      div.className = 'check-item' + (done ? ' done' : '');
-      div.innerHTML = `
-        <div class="check-box"></div>
-        <div class="check-text">
-          <div class="check-title">${item.title}</div>
-          <div class="check-desc">${item.desc}</div>
-        </div>
-        <span class="check-badge ${item.badge}">${item.badge}</span>
-      `;
-      div.addEventListener('click', () => {
-        checked[item.id] = !checked[item.id];
-        localStorage.setItem('nlmove_checklist_' + userId, JSON.stringify(checked));
-        renderChecklist(userId);
-      });
-      container.appendChild(div);
+// ── CHECKLIST ──
+function renderChecklist() {
+  const c = document.getElementById('checklist');
+  c.innerHTML = '';
+  CHECKLIST.forEach(item => {
+    const done = !!checked[item.id];
+    const div = document.createElement('div');
+    div.className = 'check-item' + (done ? ' done' : '');
+    div.innerHTML = `<div class="check-box"></div><div class="check-text"><div class="check-title">${item.title}</div><div class="check-desc">${item.desc}</div></div><span class="check-badge ${item.badge}">${item.badge}</span>`;
+    div.addEventListener('click', () => {
+      checked[item.id] = !checked[item.id];
+      localStorage.setItem('nlmove_check_' + currentUser.id, JSON.stringify(checked));
+      renderChecklist();
     });
-    updateProgress();
-  }
+    c.appendChild(div);
+  });
+  const total = CHECKLIST.length;
+  const done = Object.values(checked).filter(Boolean).length;
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('prog-bar').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('progress-pill').textContent = done + ' / ' + total + ' completati';
+}
 
-  function updateProgress() {
-    const total = CHECKLIST.length;
-    const done = Object.values(checked).filter(Boolean).length;
-    const pct = Math.round((done / total) * 100);
-    document.getElementById('progress-bar').style.width = pct + '%';
-    document.getElementById('progress-pct').textContent = pct + '%';
-    document.getElementById('progress-pill').textContent = done + ' / ' + total + ' completati';
-  }
+// ── PERCORSO ──
+function renderSteps() {
+  const steps = [
+    { key: null, label: 'Registrazione', sub: 'Account creato', status: 'done' },
+    { key: 'consulenza', label: 'Consulenza gratuita', sub: '30 min con un esperto', status: userSteps.consulenza ? 'done' : 'active' },
+    { key: 'pacchetto', label: 'Pacchetto personalizzato', sub: 'Supporto completo', status: userSteps.pacchetto ? 'done' : (userSteps.consulenza ? 'active' : 'pending') },
+    { key: 'trasferimento', label: 'Trasferimento', sub: 'Arrivo e primo insediamento', status: userSteps.trasferimento ? 'done' : 'pending' },
+  ];
+  const container = document.getElementById('steps-list');
+  container.innerHTML = '';
+  steps.forEach((s, i) => {
+    const row = document.createElement('div');
+    row.className = 'step-row';
+    const numContent = s.status === 'done' ? '✓' : (i + 1);
+    let btn = '';
+    if (s.key && !userSteps[s.key]) {
+      btn = `<button class="step-btn" onclick="markStep('${s.key}')">Segna come fatto</button>`;
+    } else if (s.key && userSteps[s.key]) {
+      btn = `<button class="step-btn done-btn">✓ Fatto</button>`;
+    }
+    row.innerHTML = `<div class="step-num ${s.status}">${numContent}</div><div class="step-info"><div class="step-name">${s.label}</div><div class="step-sub">${s.sub}</div></div>${btn}`;
+    container.appendChild(row);
+  });
+}
 
-  async function handleLogout() {
-    await sb.auth.signOut();
-    window.location.href = 'index.html';
-  }
+function markStep(key) {
+  userSteps[key] = true;
+  localStorage.setItem('nlmove_steps_' + currentUser.id, JSON.stringify(userSteps));
+  renderSteps();
+}
 
-  init();
+// ── TEST ──
+function checkTestDone() {
+  const saved = localStorage.getItem('nlmove_test_' + currentUser.id);
+  if (saved) {
+    const result = JSON.parse(saved);
+    document.getElementById('test-intro-section').style.display = 'none';
+    document.getElementById('test-done-section').style.display = 'block';
+    document.getElementById('done-level').textContent = result.level;
+  }
+}
+
+function startTest() {
+  currentQ = 0; score = 0; answers = [];
+  document.getElementById('test-intro-section').style.display = 'none';
+  document.getElementById('test-done-section').style.display = 'none';
+  document.getElementById('test-result-section').style.display = 'none';
+  document.getElementById('test-question-section').style.display = 'block';
+  renderQuestion();
+}
+
+function retryTest() {
+  localStorage.removeItem('nlmove_test_' + currentUser.id);
+  startTest();
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[currentQ];
+  const pct = (currentQ / QUESTIONS.length) * 100;
+  document.getElementById('q-counter').textContent = `Domanda ${currentQ + 1} di ${QUESTIONS.length}`;
+  document.getElementById('q-num').textContent = `DOMANDA ${currentQ + 1}`;
+  document.getElementById('q-level-badge').textContent = q.level;
+  document.getElementById('q-level-badge').className = 'test-level-badge badge-' + q.level.toLowerCase();
+  document.getElementById('test-prog').style.width = pct + '%';
+  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('q-context').textContent = q.context;
+  document.getElementById('q-context').style.display = q.context ? 'block' : 'none';
+  document.getElementById('feedback').className = 'feedback-box';
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('btn-next').classList.remove('visible');
+  const opts = document.getElementById('options');
+  opts.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = 'option';
+    div.innerHTML = `<div class="option-letter">${String.fromCharCode(65+i)}</div><div class="option-text">${opt}</div>`;
+    div.addEventListener('click', () => selectOption(i));
+    opts.appendChild(div);
+  });
+}
+
+function selectOption(idx) {
+  if (document.getElementById('btn-next').classList.contains('visible')) return;
+  const q = QUESTIONS[currentQ];
+  const opts = document.querySelectorAll('.option');
+  opts.forEach(o => o.style.pointerEvents = 'none');
+  opts[idx].classList.add(idx === q.correct ? 'correct' : 'wrong');
+  if (idx !== q.correct) opts[q.correct].classList.add('correct');
+  const isCorrect = idx === q.correct;
+  if (isCorrect) score++;
+  answers.push({ q: currentQ, selected: idx, correct: isCorrect });
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback-box ' + (isCorrect ? 'correct' : 'wrong');
+  fb.textContent = (isCorrect ? '✓ Corretto! ' : '✗ Non corretto. ') + q.explanation;
+  document.getElementById('btn-next').classList.add('visible');
+  document.getElementById('btn-next').textContent = currentQ < QUESTIONS.length - 1 ? 'Avanti →' : 'Vedi risultato →';
+}
+
+function nextQuestion() {
+  currentQ++;
+  if (currentQ < QUESTIONS.length) { renderQuestion(); }
+  else { showResult(); }
+}
+
+function showResult() {
+  document.getElementById('test-question-section').style.display = 'none';
+  const pct = score / QUESTIONS.length;
+  let level;
+  if (pct < 0.2) level = 'A1';
+  else if (pct < 0.4) level = 'A2';
+  else if (pct < 0.6) level = 'B1';
+  else if (pct < 0.8) level = 'B2';
+  else level = 'C1';
+  const info = LEVELS[level];
+  localStorage.setItem('nlmove_test_' + currentUser.id, JSON.stringify({ level, score, total: QUESTIONS.length, date: new Date().toISOString() }));
+  const tipsHTML = info.tips.map(t => `<div class="tip-item"><span class="tip-icon">💡</span>${t}</div>`).join('');
+  const rs = document.getElementById('test-result-section');
+  rs.style.display = 'block';
+  rs.innerHTML = `
+    <div class="result-card">
+      <div style="font-size:0.78rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.5rem;">IL TUO LIVELLO</div>
+      <div class="result-level">${level}</div>
+      <div class="result-label">${info.label}</div>
+      <div class="result-score">Hai risposto correttamente a <strong>${score}</strong> domande su <strong>${QUESTIONS.length}</strong></div>
+      <div class="result-desc">${info.desc}</div>
+      <div class="result-tips"><h3>Cosa fare adesso</h3>${tipsHTML}</div>
+      <div>
+        <button class="btn-retry" onclick="retryTest()">Rifai il test</button>
+        <a href="https://calendly.com/movenlexpat/consulenza-gratuita-30-min" target="_blank" class="btn-consult">Prenota consulenza →</a>
+      </div>
+    </div>`;
+}
+
+async function handleLogout() {
+  await sb.auth.signOut();
+  window.location.href = 'index.html';
+}
+
+init();
 </script>
 </body>
 </html>
