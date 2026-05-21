@@ -299,7 +299,7 @@
       margin-bottom: 3.5rem; flex-wrap: wrap;
     }
     .grid-3 {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px;
+      display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5px;
       border: 1.5px solid var(--line); border-radius: 1.2rem; overflow: hidden;
     }
     .svc-item {
@@ -311,8 +311,8 @@
       cursor: default;
     }
     .svc-item:hover { background: var(--bg); }
-    .svc-item:nth-child(3), .svc-item:nth-child(6) { border-right: none; }
-    .svc-item:nth-child(4), .svc-item:nth-child(5), .svc-item:nth-child(6) { border-bottom: none; }
+    .svc-item:nth-child(2), .svc-item:nth-child(4) { border-right: none; }
+    .svc-item:nth-child(3), .svc-item:nth-child(4) { border-bottom: none; }
     .svc-num {
       font-family: 'Syne', sans-serif;
       font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
@@ -581,10 +581,8 @@
       section { padding: 3.5rem 5%; }
 
       .grid-3 { grid-template-columns: 1fr 1fr; }
-      .svc-item:nth-child(3) { border-right: 1.5px solid var(--line); }
-      .svc-item:nth-child(2) { border-right: none; }
-      .svc-item:nth-child(4) { border-bottom: 1.5px solid var(--line); }
-      .svc-item:nth-child(5), .svc-item:nth-child(6) { border-bottom: none; }
+      .svc-item:nth-child(2), .svc-item:nth-child(4) { border-right: none; }
+      .svc-item:nth-child(3), .svc-item:nth-child(4) { border-bottom: none; }
 
       .steps-wrap { grid-template-columns: 1fr 1fr; }
       .step-block { border-bottom: 1.5px solid var(--line); }
@@ -625,7 +623,7 @@
 
       /* Servizi */
       .grid-3 { grid-template-columns: 1fr; }
-      .svc-item { border-right: none !important; }
+      .svc-item { border-right: none !important; border-bottom: 1.5px solid var(--line) !important; }
       .svc-item:last-child { border-bottom: none !important; }
 
       /* Steps */
@@ -757,6 +755,8 @@
     .download-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(217,95,43,0.5); }
     .download-meta { font-size:0.78rem; color:rgba(255,255,255,0.35); text-align:center; margin-top:0.7rem; }
   </style>
+  <!-- Iubenda Cookie Banner -->
+  <script type="text/javascript" src="https://embeds.iubenda.com/widgets/66f330a0-0261-40ce-ab35-dfe987e52492.js"></script>
 </head>
 <body>
 
@@ -1196,8 +1196,10 @@
   </div>
   <div>© 2024 NLMove — Consulenza trasferimento in Olanda</div>
   <div class="footer-links">
-    <a href="#">Privacy</a>
-    <a href="#">Cookie</a>
+    <a href="https://www.iubenda.com/privacy-policy/27170117" class="iubenda-white iubenda-noiframe iubenda-embed" title="Privacy Policy">Privacy Policy</a>
+    <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+    <a href="https://www.iubenda.com/privacy-policy/27170117/cookie-policy" class="iubenda-white iubenda-noiframe iubenda-embed" title="Cookie Policy">Cookie Policy</a>
+    <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
     <a href="https://calendly.com/movenlexpat/consulenza-gratuita-30-min" target="_blank" rel="noopener">Prenota ora</a>
     <a href="#contatto">Contatti</a>
   </div>
