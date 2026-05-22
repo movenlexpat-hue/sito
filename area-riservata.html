@@ -330,7 +330,7 @@
             <h2 style="color:white;font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:0.5rem;">Guida Completa al Trasferimento in Olanda</h2>
             <p style="color:rgba(255,255,255,0.6);font-size:0.88rem;line-height:1.6;">Tutto quello che devi sapere prima di partire — documenti, burocrazia, casa, lavoro, sanità e molto altro. Scritta da chi ci vive, pensata per gli italiani.</p>
           </div>
-          <a id="pdf-download-btn" href="guida-trasferimento-olanda-2025.pdf" download="Guida-Trasferimento-Olanda-NLMove-2025.pdf" class="btn-dl" style="margin-left:0;">📥 Scarica PDF</a>
+          <a id="pdf-download-btn" href="Guida-Trasferimento-Olanda-NLMove-2025.pdf" download="Guida-Trasferimento-Olanda-NLMove-2025.pdf" class="btn-dl" style="margin-left:0;">📥 Scarica PDF</a>
         </div>
         <div class="card" style="margin-top:1.5rem;">
           <div class="card-label">Cosa trovi nella guida</div>
@@ -424,10 +424,42 @@ let score = 0;
 let answers = [];
 
 // ── INIT ──
+async function resendConfirmEmail() {
+  const btn = event.target;
+  btn.disabled = true; btn.textContent = 'Invio in corso...';
+  const { error } = await sb.auth.resend({ type: 'signup', email: currentUser.email });
+  const msg = document.getElementById('resend-msg');
+  if (error) {
+    msg.textContent = 'Errore nell'invio. Riprova tra qualche minuto.';
+    btn.disabled = false; btn.textContent = 'Reinvia email di conferma';
+  } else {
+    msg.textContent = '✅ Email inviata! Controlla la casella di posta.';
+    btn.textContent = 'Email inviata!';
+  }
+}
+
 async function init() {
   const { data: { session } } = await sb.auth.getSession();
   if (!session) { window.location.href = 'login.html'; return; }
   currentUser = session.user;
+  // Check email confirmed
+  if (!currentUser.email_confirmed_at) {
+    document.getElementById('loading').innerHTML = \`
+      <div style="text-align:center;padding:3rem 1rem;">
+        <div style="font-size:2.5rem;margin-bottom:1rem;">📧</div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:0.6rem;">Conferma la tua email</div>
+        <p style="font-size:0.9rem;color:var(--ink2);max-width:380px;margin:0 auto 1.5rem;line-height:1.6;">
+          Abbiamo inviato un link di verifica a <strong>\${currentUser.email}</strong>.<br>
+          Clicca sul link nell'email per accedere all'area riservata.
+        </p>
+        <button onclick="resendConfirmEmail()" style="background:var(--accent);color:white;border:none;border-radius:2rem;padding:0.7rem 1.6rem;font-family:'Epilogue',sans-serif;font-size:0.88rem;font-weight:500;cursor:pointer;">
+          Reinvia email di conferma
+        </button>
+        <div id="resend-msg" style="margin-top:1rem;font-size:0.82rem;color:var(--ink3);"></div>
+        <div style="margin-top:1.5rem;"><a href="login.html" style="font-size:0.82rem;color:var(--ink3);">← Torna al login</a></div>
+      </div>\`;
+    return;
+  }
   const name = currentUser.user_metadata?.full_name?.split(' ')[0] || currentUser.email.split('@')[0];
   document.getElementById('greeting-name').textContent = name;
   document.getElementById('user-name').textContent = currentUser.email;
