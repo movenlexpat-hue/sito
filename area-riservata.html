@@ -426,38 +426,43 @@ let answers = [];
 // ── INIT ──
 async function resendConfirmEmail() {
   const btn = event.target;
+  const msg = document.getElementById('resend-msg');
   btn.disabled = true; btn.textContent = 'Invio in corso...';
   const { error } = await sb.auth.resend({ type: 'signup', email: currentUser.email });
-  const msg = document.getElementById('resend-msg');
   if (error) {
-    msg.textContent = 'Errore nell'invio. Riprova tra qualche minuto.';
+    msg.textContent = "Errore nell'invio. Riprova tra qualche minuto.";
+    msg.className = 'msg error';
     btn.disabled = false; btn.textContent = 'Reinvia email di conferma';
   } else {
-    msg.textContent = '✅ Email inviata! Controlla la casella di posta.';
+    msg.textContent = 'Email inviata! Controlla la casella di posta.';
+    msg.className = 'msg success';
     btn.textContent = 'Email inviata!';
   }
+}
+
+function showEmailNotConfirmed(email) {
+  var html = '<div style="text-align:center;padding:3rem 1rem;">';
+  html += '<div style="font-size:2.5rem;margin-bottom:1rem;">📧</div>';
+  html += '<div style="font-family:Syne,sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:0.6rem;">Conferma la tua email</div>';
+  html += '<p style="font-size:0.9rem;color:var(--ink2);max-width:380px;margin:0 auto 1.5rem;line-height:1.6;">';
+  html += 'Abbiamo inviato un link di verifica a <strong>' + email + '</strong>.<br>';
+  html += "Clicca sul link nell'email per accedere all'area riservata.";
+  html += '</p>';
+  html += '<button onclick="resendConfirmEmail()" style="background:var(--accent);color:white;border:none;border-radius:2rem;padding:0.7rem 1.6rem;font-family:Epilogue,sans-serif;font-size:0.88rem;font-weight:500;cursor:pointer;">Reinvia email di conferma</button>';
+  html += '<div id="resend-msg" style="margin-top:1rem;font-size:0.82rem;"></div>';
+  html += '<div style="margin-top:1.5rem;"><a href="login.html" style="font-size:0.82rem;color:var(--ink3);">← Torna al login</a></div>';
+  html += '</div>';
+  document.getElementById('loading').innerHTML = html;
 }
 
 async function init() {
   const { data: { session } } = await sb.auth.getSession();
   if (!session) { window.location.href = 'login.html'; return; }
   currentUser = session.user;
-  // Check email confirmed
-  if (!currentUser.email_confirmed_at) {
-    document.getElementById('loading').innerHTML = \`
-      <div style="text-align:center;padding:3rem 1rem;">
-        <div style="font-size:2.5rem;margin-bottom:1rem;">📧</div>
-        <div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:0.6rem;">Conferma la tua email</div>
-        <p style="font-size:0.9rem;color:var(--ink2);max-width:380px;margin:0 auto 1.5rem;line-height:1.6;">
-          Abbiamo inviato un link di verifica a <strong>\${currentUser.email}</strong>.<br>
-          Clicca sul link nell'email per accedere all'area riservata.
-        </p>
-        <button onclick="resendConfirmEmail()" style="background:var(--accent);color:white;border:none;border-radius:2rem;padding:0.7rem 1.6rem;font-family:'Epilogue',sans-serif;font-size:0.88rem;font-weight:500;cursor:pointer;">
-          Reinvia email di conferma
-        </button>
-        <div id="resend-msg" style="margin-top:1rem;font-size:0.82rem;color:var(--ink3);"></div>
-        <div style="margin-top:1.5rem;"><a href="login.html" style="font-size:0.82rem;color:var(--ink3);">← Torna al login</a></div>
-      </div>\`;
+  // Check email confirmed — use both fields Supabase may populate
+  var confirmed = currentUser.email_confirmed_at || currentUser.confirmed_at;
+  if (!confirmed) {
+    showEmailNotConfirmed(currentUser.email);
     return;
   }
   const name = currentUser.user_metadata?.full_name?.split(' ')[0] || currentUser.email.split('@')[0];
