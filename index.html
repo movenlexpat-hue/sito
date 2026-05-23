@@ -767,15 +767,25 @@
     }
     .svc-featured-body {
       padding: 2.5rem 2.8rem; display: flex; flex-direction: column; justify-content: center;
+      overflow: hidden;
     }
     .svc-featured-body .svc-num { color: rgba(255,255,255,0.2); }
     .svc-featured-body .svc-name { color: white; font-size: 1.25rem; margin-bottom: 0.8rem; }
-    .svc-featured-body .svc-desc { color: rgba(255,255,255,0.65); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .svc-featured-body .svc-desc { color: rgba(255,255,255,0.65); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem; word-break: break-word; overflow-wrap: break-word; }
 
-    .svc-stat-row { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-    .svc-stat { display: flex; flex-direction: column; gap: 0.2rem; }
-    .svc-stat span { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; color: var(--accent); }
-    .svc-stat { font-size: 0.72rem; color: rgba(255,255,255,0.45); letter-spacing: 0.04em; }
+    .svc-stat-row { display: flex; gap: 2rem; flex-wrap: nowrap; margin-top: 0.5rem; }
+    .svc-stat {
+      display: flex; flex-direction: column; gap: 0.3rem;
+      min-width: 0; flex-shrink: 0;
+    }
+    .svc-stat span {
+      font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800;
+      color: var(--accent); white-space: nowrap; line-height: 1.1;
+    }
+    .svc-stat-label {
+      font-size: 0.72rem; color: rgba(255,255,255,0.5);
+      letter-spacing: 0.04em; white-space: nowrap;
+    }
 
     .svc-featured-img { overflow: hidden; }
     .svc-featured-img img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.75; filter: grayscale(20%); }
@@ -846,10 +856,9 @@
     <li><a href="#chi-sono">Chi sono</a></li>
     <li><a href="#come-funziona">Come funziona</a></li>
     <li><a href="#perche-olanda">Perché l'Olanda</a></li>
-    <li><a href="#faq">FAQ</a>
-      <a href="#prezzi">Prezzi</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#prezzi">Prezzi</a></li>
     <li><a href="login.html" style="color:var(--accent);font-weight:600;">📥 Guida Gratuita</a></li>
-    <li><a href="#testimonianze">Recensioni</a></li>
     <li><a href="https://calendly.com/movenlexpat/consulenza-gratuita-30-min" target="_blank" rel="noopener" class="nav-pill">Consulenza gratuita →</a></li>
     <li><a href="login.html" style="font-weight:600;">Accedi →</a></li>
   </ul>
@@ -865,7 +874,6 @@
   <a href="#come-funziona" class="mobile-link">Come funziona</a>
   <a href="#perche-olanda" class="mobile-link">Perché l'Olanda</a>
   <a href="#prezzi" class="mobile-link">Prezzi</a>
-  <a href="#testimonianze" class="mobile-link">Recensioni</a>
   <a href="#contatto" class="mobile-link">Contatti</a>
   <a href="login.html" class="mobile-link" style="color:var(--accent)">📥 Guida Gratuita</a>
   <a href="login.html" class="mobile-link" style="color:var(--accent);font-weight:600;">Accedi all'area riservata →</a>
@@ -938,9 +946,9 @@
           <div class="svc-name">Zero stress in burocrazia</div>
           <p class="svc-desc">BSN in 7 giorni, BRP, conto corrente: gestisco io ogni documento. Risparmia 40+ ore di ricerca e telefonate con uffici olandesi.</p>
           <div class="svc-stat-row">
-            <div class="svc-stat"><span>7 gg</span>BSN medio</div>
-            <div class="svc-stat"><span>40+</span>ore risparmiate</div>
-            <div class="svc-stat"><span>100%</span>in italiano</div>
+            <div class="svc-stat"><span>7 gg</span><span class="svc-stat-label">BSN medio</span></div>
+            <div class="svc-stat"><span>40+</span><span class="svc-stat-label">ore risparmiate</span></div>
+            <div class="svc-stat"><span>100%</span><span class="svc-stat-label">in italiano</span></div>
           </div>
         </div>
         <div class="svc-featured-img">
@@ -1442,6 +1450,23 @@
       document.body.style.overflow = '';
     });
   });
+
+  // ── FAQ accordion ──
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-a');
+    const isOpen = btn.classList.contains('open');
+    // Chiudi tutti
+    document.querySelectorAll('.faq-item').forEach(function(fi) {
+      fi.querySelector('.faq-q').classList.remove('open');
+      fi.querySelector('.faq-a').classList.remove('open');
+    });
+    // Apri quello cliccato se era chiuso
+    if (!isOpen) {
+      btn.classList.add('open');
+      answer.classList.add('open');
+    }
+  }
 
   // ── Scroll reveal ──
   const observer = new IntersectionObserver((entries) => {
