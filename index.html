@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJ6N8JZQZN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZJ6N8JZQZN');
+  </script>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -763,7 +771,7 @@
     .svc-featured {
       display: grid; grid-template-columns: 1fr 1fr;
       background: var(--ink); border-radius: 1.4rem;
-      overflow: hidden; min-height: 300px;
+      overflow: hidden; min-height: 320px;
     }
     .svc-featured-body {
       padding: 2.5rem 2.8rem; display: flex; flex-direction: column; justify-content: center;
@@ -793,12 +801,28 @@
 
     /* Responsive servizi */
     @media (max-width: 820px) {
-      .svc-featured { grid-template-columns: 1fr; }
-      .svc-featured-img { height: 200px; }
+      .svc-featured {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+      }
+      .svc-featured-img {
+        height: 220px;
+        order: -1;
+        min-height: 180px;
+      }
+      .svc-featured-body {
+        padding: 2rem 2rem 2.2rem;
+      }
+      .svc-stat-row { gap: 1.4rem; flex-wrap: nowrap; }
       .svc-cards { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 560px) {
-      .svc-featured-body { padding: 1.8rem; }
+      .svc-featured-img { height: 180px; }
+      .svc-featured-body { padding: 1.5rem; }
+      .svc-featured-body .svc-name { font-size: 1.1rem; }
+      .svc-stat-row { gap: 1.2rem; }
+      .svc-stat span { font-size: 1rem; }
+      .svc-stat-label { font-size: 0.65rem; }
       .svc-cards { grid-template-columns: 1fr; }
     }
 
@@ -826,11 +850,125 @@
     .faq-a.open { display: block; }
     .faq-a p { font-size: 0.9rem; color: var(--ink2); line-height: 1.8; }
 
+
+    /* ── Scroll progress bar ── */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: var(--accent); z-index: 9999;
+      transition: width 0.1s linear;
+      border-radius: 0 2px 2px 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+      .marquee-wrap { overflow: visible; }
+    }
+
+    .step-icon-wrap {
+      width: 48px; height: 48px; margin-bottom: 1rem;
+      color: var(--accent);
+    }
+    .step-icon { width: 48px; height: 48px; color: var(--accent); }
+
+    .why-hero-img {
+      position: relative; border-radius: 1.2rem; overflow: hidden;
+      height: 280px; margin-bottom: 2.5rem;
+    }
+    .why-hero-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; filter: brightness(0.75);
+    }
+    .why-hero-overlay {
+      position: absolute; bottom: 1.2rem; left: 1.5rem;
+      background: rgba(26,26,24,0.7); backdrop-filter: blur(8px);
+      color: white; font-size: 0.82rem; font-weight: 500;
+      padding: 0.5rem 1rem; border-radius: 2rem;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    @media (max-width: 640px) {
+      .why-hero-img { height: 200px; }
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── RESPONSIVE FIXES ── */
+
+    /* chisono-grid — inline style non ha breakpoint */
+    @media (max-width: 820px) {
+      .chisono-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+      }
+      .chisono-grid > div:first-child {
+        max-width: 420px;
+        margin: 0 auto;
+      }
+    }
+
+    /* step-icon — scala su mobile */
+    @media (max-width: 640px) {
+      .step-icon-wrap { width: 38px; height: 38px; }
+      .step-icon { width: 38px; height: 38px; }
+      .step-block { padding: 1.8rem 1.2rem; }
+    }
+
+    /* svc-featured su small mobile — stat row */
+    @media (max-width: 400px) {
+      .svc-stat-row { gap: 1rem; }
+      .svc-stat span { font-size: 0.95rem; }
+      .svc-stat-label { font-size: 0.62rem; }
+      .svc-featured-body { padding: 1.3rem; }
+      .svc-featured-body .svc-name { font-size: 1rem; }
+    }
+
+    /* why-hero-img overlay su mobile piccolo */
+    @media (max-width: 400px) {
+      .why-hero-overlay {
+        font-size: 0.72rem;
+        padding: 0.4rem 0.75rem;
+        left: 0.8rem; bottom: 0.8rem;
+        max-width: calc(100% - 1.6rem);
+        white-space: normal;
+      }
+    }
+
+    /* faq su mobile piccolo */
+    @media (max-width: 400px) {
+      .faq-q { font-size: 0.88rem; }
+      .faq-a p { font-size: 0.85rem; }
+    }
+
+    /* contact grid — assicura 1 colonna sotto 640px e padding corretto */
+    @media (max-width: 640px) {
+      .contact-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+      .contact-left h2 { font-size: 1.6rem; }
+    }
+
+    /* pricing card su mobile — testo non si taglia */
+    @media (max-width: 400px) {
+      .price-card { padding: 1.5rem 1.2rem; }
+      .price-includes li { font-size: 0.82rem; }
+    }
+
+    /* testimonianze quote non si taglia */
+    @media (max-width: 640px) {
+      .testi-quote { font-size: 0.88rem !important; }
+    }
+
+    /* download section button full width su mobile */
+    @media (max-width: 640px) {
+      .dl-card { flex-direction: column !important; align-items: flex-start !important; gap: 1.2rem !important; }
+      .btn-dl { margin-left: 0 !important; width: 100%; text-align: center; }
+    }
+
   </style>
-  <!-- Iubenda Cookie Banner -->
-  <script type="text/javascript" src="https://embeds.iubenda.com/widgets/66f330a0-0261-40ce-ab35-dfe987e52492.js"></script>
 </head>
 <body>
+
+<div id="scroll-progress"></div>
 
 <!-- FLOATING WHATSAPP -->
 <a class="float-wa" href="https://wa.me/393886304984" target="_blank" rel="noopener" title="Scrivimi su WhatsApp">
@@ -1046,25 +1184,58 @@
   <div class="steps-wrap">
     <div class="step-block">
       <div class="step-arrow">›</div>
+      <div class="step-icon-wrap">
+        <svg class="step-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1.5" opacity="0.2"/>
+          <path d="M13 20C13 16.134 16.134 13 20 13C23.866 13 27 16.134 27 20C27 23.866 23.866 27 20 27" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M20 17V20L22 22" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 24L11 27M11 27L14 27M11 27L11 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
       <div class="step-n">01</div>
       <div class="step-title">Consulenza Gratuita</div>
       <p class="step-desc">Parliamo della tua situazione in una chiamata conoscitiva senza impegno. Ascolto, capisco, rispondo.</p>
     </div>
     <div class="step-block">
       <div class="step-arrow">›</div>
+      <div class="step-icon-wrap">
+        <svg class="step-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1.5" opacity="0.2"/>
+          <rect x="13" y="12" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M16 17H24M16 20H24M16 23H21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M23 26L25 28L29 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
       <div class="step-n">02</div>
       <div class="step-title">Piano Personalizzato</div>
       <p class="step-desc">Creo un piano su misura con passi, scadenze e documenti necessari per il tuo caso specifico.</p>
     </div>
     <div class="step-block">
       <div class="step-arrow">›</div>
+      <div class="step-icon-wrap">
+        <svg class="step-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1.5" opacity="0.2"/>
+          <path d="M14 20C14 16.686 16.686 14 20 14C23.314 14 26 16.686 26 20C26 23.314 23.314 26 20 26C18.343 26 16.843 25.314 15.757 24.243" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M20 17V20L22.5 21.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="14" cy="26" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+      </div>
       <div class="step-n">03</div>
       <div class="step-title">Supporto Attivo</div>
       <p class="step-desc">Ti accompagno durante l'intero processo, gestendo la burocrazia e rispondendo ad ogni domanda.</p>
     </div>
     <div class="step-block">
+      <div class="step-icon-wrap">
+        <svg class="step-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="1.5" opacity="0.2"/>
+          <path d="M20 13L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M14.5 15.5L17.5 18.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M25.5 15.5L22.5 18.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M13 24C13 21.791 16.134 20 20 20C23.866 20 27 21.791 27 24V26C27 27.105 26.105 28 25 28H15C13.895 28 13 27.105 13 26V24Z" stroke="currentColor" stroke-width="1.8"/>
+        </svg>
+      </div>
       <div class="step-n">04</div>
-      <div class="step-title">Arrivo & Integrazione</div>
+      <div class="step-title">Arrivo &amp; Integrazione</div>
       <p class="step-desc">Continuo ad assisterti per i primi mesi dopo l'arrivo per garantire un'integrazione fluida.</p>
     </div>
   </div>
@@ -1147,6 +1318,12 @@
   <div style="padding: 4.5rem 5%;">
     <div class="section-label">Perché sceglierla</div>
     <h2>L'Olanda che non ti aspetti</h2>
+    <div class="why-hero-img">
+      <img src="https://images.unsplash.com/photo-1580900796681-1a7ca1a24cef?w=1200&q=80&auto=format&fit=crop" alt="Amsterdam canali di notte" loading="lazy"/>
+      <div class="why-hero-overlay">
+        <span>🇳🇱 Amsterdam — Capital of possibilities</span>
+      </div>
+    </div>
     <div class="why-grid">
       <div>
         <div class="why-list">
@@ -1212,10 +1389,10 @@
       <div class="testi-stars">★★★★★</div>
       <p class="testi-quote">"Senza questo servizio non avrei mai saputo da dove iniziare. Mi ha seguito dall'inizio alla fine, persino nell'apertura del conto bancario. Ora sono ad Amsterdam da 2 anni e non tornerei mai indietro."</p>
       <div class="testi-person">
-        <div class="testi-av">MR</div>
+        <div class="testi-av" style="background:linear-gradient(135deg,#D95F2B,#f0824a);">MR</div>
         <div>
           <div class="testi-n">Marco R.</div>
-          <div class="testi-c">Da Milano → Amsterdam</div>
+          <div class="testi-c">Da Milano → Amsterdam · 2024</div>
         </div>
       </div>
     </div>
@@ -1223,10 +1400,10 @@
       <div class="testi-stars">★★★★★</div>
       <p class="testi-quote">"Trasferirsi con tutta la famiglia sembrava impossibile. Invece è stato tutto gestito con grande professionalità: scuola per i bambini, casa, permesso di soggiorno. Un supporto umano e competente."</p>
       <div class="testi-person">
-        <div class="testi-av">SF</div>
+        <div class="testi-av" style="background:linear-gradient(135deg,#1F3F6A,#2d5fa8);">SF</div>
         <div>
           <div class="testi-n">Sara F.</div>
-          <div class="testi-c">Da Roma → Rotterdam</div>
+          <div class="testi-c">Da Roma → Rotterdam · 2024</div>
         </div>
       </div>
     </div>
@@ -1234,10 +1411,10 @@
       <div class="testi-stars">★★★★★</div>
       <p class="testi-quote">"Grazie al supporto sul 30% Ruling ho risparmiato migliaia di euro. La consulenza fiscale è valsa da sola il costo del servizio. Consigliatissimo per chi si trasferisce per lavoro."</p>
       <div class="testi-person">
-        <div class="testi-av">LB</div>
+        <div class="testi-av" style="background:linear-gradient(135deg,#2a7a4e,#3aaa6e);">LB</div>
         <div>
           <div class="testi-n">Luca B.</div>
-          <div class="testi-c">Da Torino → Eindhoven</div>
+          <div class="testi-c">Da Torino → Eindhoven · 2023</div>
         </div>
       </div>
     </div>
@@ -1406,7 +1583,11 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    btnText.textContent = 'Invio in corso...';
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.style.opacity = '0.75';
+    btn.style.cursor = 'not-allowed';
+    btnText.innerHTML = '<span style="display:inline-flex;align-items:center;gap:0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="animation:spin 0.8s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Invio in corso…</span>';
 
     try {
       const res = await fetch(form.action, {
@@ -1418,12 +1599,28 @@
         formFields.style.display = 'none';
         successDiv.style.display = 'block';
       } else {
-        btnText.textContent = 'Errore. Riprova.';
+        btnText.textContent = '⚠️ Errore. Riprova.';
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
       }
     } catch {
-      btnText.textContent = 'Errore. Riprova.';
+      btnText.textContent = '⚠️ Errore. Riprova.';
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.style.cursor = 'pointer';
     }
   });
+
+
+  // ── Scroll progress bar ──
+  const progressBar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }, { passive: true });
 
   // ── Hamburger menu ──
   const hamburger = document.getElementById('hamburger');
@@ -1475,5 +1672,8 @@
     observer.observe(el);
   });
 </script>
+
+  <!-- Iubenda Cookie Banner (caricato dopo il render) -->
+  <script defer type="text/javascript" src="https://embeds.iubenda.com/widgets/66f330a0-0261-40ce-ab35-dfe987e52492.js"></script>
 </body>
 </html>
